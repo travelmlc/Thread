@@ -1,0 +1,11 @@
+1、关于Object类中的wait和notify方法
+    1、wait和notify方法都不是线程对象的方法，是java中任何一个java对象都含有此方法，因为这两个方法是Object类中自带的。
+    2、wait和notify方法不是通过线程对象调用的，不是t.wait,或者t.notify
+
+2、wait方法的作用？
+    Object o1 = new Object();
+    o1.wait();
+    表示：
+        让正在o对象上活动的线程进入等待状态，无期限等待，直到被唤醒为止。
+        o1.wait();方法的调用，会让“当前”线程进入等待状态
+3、notify方法的作用？
