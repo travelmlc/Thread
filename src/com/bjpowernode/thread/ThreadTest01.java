@@ -1,6 +1,7 @@
 package com.bjpowernode.thread;
 
 /**
+ * 线程的开启
  *
  */
 public class ThreadTest01 {
