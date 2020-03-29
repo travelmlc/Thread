@@ -8,7 +8,7 @@ public class ThreadTest01 {
 
     public static void main(String[] args) {
         //因为A类继承了Thread类，所以A类就是一个线程类
-        A a = new A();
+        Thread a = new A();
 
         //开启线程
         /*
