@@ -5,13 +5,10 @@ package com.bjpowernode.thread;
  * Package:com.bjpowernode.thread
  * Description:
  *
- * @Date:2020/3/29 11:49
+ * @Date:2020/3/29 13:35
  * @Author:mlc17607163664@163.com
  */
 public class ThreadTest06 {
 
-    public static void main(String[] args) {
-
-        Thread thread = new Thread();
-    }
+    
 }
