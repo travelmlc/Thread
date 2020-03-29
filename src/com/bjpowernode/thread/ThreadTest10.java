@@ -9,16 +9,16 @@ package com.bjpowernode.thread;
  * @Author:mlc17607163664@163.com
  *
  * 问题：doOther的执行需不需要等待doSome？
- * 不需要，因为doOther上面没有synchronized关键字，表示该方法没有被锁，
- *  执行的时候不需要获取对象的对象锁
+ * 需要，因为synchronized出现在静态方法上是找类锁，类锁永远只有一把
  */
-public class ThreadTest07 {
+public class ThreadTest10 {
 
     public static void main(String[] args) {
-        MyClass mc = new MyClass();
+        MyClass4 mc1 = new MyClass4();
+        MyClass4 mc2 = new MyClass4();
 
-        Thread t1 = new MyThread(mc);
-        Thread t2 = new MyThread(mc);
+        Thread t1 = new MyThread4(mc1);
+        Thread t2 = new MyThread4(mc2);
 
         t1.setName("t1");
         t2.setName("t2");
@@ -34,10 +34,10 @@ public class ThreadTest07 {
     }
 }
 
-class MyThread extends Thread{
-    private MyClass mc;
+class MyThread4 extends Thread{
+    private MyClass4 mc;
 
-    public MyThread(MyClass mc) {
+    public MyThread4(MyClass4 mc) {
         this.mc = mc;
     }
 
@@ -52,10 +52,10 @@ class MyThread extends Thread{
     }
 }
 
-class MyClass {
+class MyClass4 {
 
-    //synchronized出现在实例对象上，锁的是this，也就是mc
-    public synchronized void doSome(){
+    //synchronized出现在静态方法上是找类锁，而类锁永远只有一把
+    public synchronized static void doSome(){
         System.out.println("doSome before");
         try {
             Thread.sleep(1000 * 10);
@@ -65,7 +65,7 @@ class MyClass {
         System.out.println("doSome after");
     }
 
-    public void doOther(){
+    public static synchronized void doOther(){
         System.out.println("doOther before");
         System.out.println("doOther after");
     }

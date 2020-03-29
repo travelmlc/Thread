@@ -9,16 +9,16 @@ package com.bjpowernode.thread;
  * @Author:mlc17607163664@163.com
  *
  * 问题：doOther的执行需不需要等待doSome？
- * 不需要，因为doOther上面没有synchronized关键字，表示该方法没有被锁，
- *  执行的时候不需要获取对象的对象锁
+ * 需要，因为doOther方法上含有synchronized，表示锁的是this，也就是mc,
+ * 当t1拿走了对象锁，t2找不到对象锁，只能等待
  */
-public class ThreadTest07 {
+public class ThreadTest08 {
 
     public static void main(String[] args) {
-        MyClass mc = new MyClass();
+        MyClass2 mc = new MyClass2();
 
-        Thread t1 = new MyThread(mc);
-        Thread t2 = new MyThread(mc);
+        Thread t1 = new MyThread2(mc);
+        Thread t2 = new MyThread2(mc);
 
         t1.setName("t1");
         t2.setName("t2");
@@ -34,10 +34,10 @@ public class ThreadTest07 {
     }
 }
 
-class MyThread extends Thread{
-    private MyClass mc;
+class MyThread2 extends Thread{
+    private MyClass2 mc;
 
-    public MyThread(MyClass mc) {
+    public MyThread2(MyClass2 mc) {
         this.mc = mc;
     }
 
@@ -52,7 +52,7 @@ class MyThread extends Thread{
     }
 }
 
-class MyClass {
+class MyClass2 {
 
     //synchronized出现在实例对象上，锁的是this，也就是mc
     public synchronized void doSome(){
@@ -65,7 +65,7 @@ class MyClass {
         System.out.println("doSome after");
     }
 
-    public void doOther(){
+    public synchronized void doOther(){
         System.out.println("doOther before");
         System.out.println("doOther after");
     }
