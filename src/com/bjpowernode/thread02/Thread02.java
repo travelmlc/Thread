@@ -25,6 +25,7 @@ public class Thread02 {
         //指定定时任务
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = sdf.parse("2020-03-29 21:46:00");
+        System.out.println(date);
         /*
             task:定时任务
             date:第一次执行时间
